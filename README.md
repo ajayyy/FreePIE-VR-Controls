@@ -1,3 +1,9 @@
-# Fork of FreePIE-VR-Controls for Wii-Motes
+# FreePIE-VR-Controls for Wii-Motes
 
-I'm sorry if this is against the licence. But there is no license at the moment. I will remove this if you want.
+# This is Coming Soon
+
+This around 50% done
+
+#Feel free to put suggestions in the issues page
+
+Thanks!
