@@ -140,10 +140,10 @@ def vive_controller():
 	Lstart = joystick[joyLi].getDown(3)
 	Lbumper = joystick[joyLi].getDown(4)
 	
-	Rone = joystick[joyRi].getDown(0)
+	Rone = wiimote[0].buttons.button_down(WiimoteButtons.DPadUp) or wiimote[0].buttons.button_down(WiimoteButtons.DPadDown) or wiimote[0].buttons.button_down(WiimoteButtons.DPadLeft) or wiimote[0].buttons.button_down(WiimoteButtons.DPadRight)
 	Rtrigger = wiimote[0].buttons.button_down(WiimoteButtons.B)
-	Rfour = joystick[joyRi].getDown(2)
-	Rstart = joystick[joyRi].getDown(3)
+	Rfour = wiimote[0].buttons.button_down(WiimoteButtons.Plus)
+	Rstart = wiimote[0].buttons.button_down(WiimoteButtons.Home)
 	Rbumper = wiimote[0].buttons.button_down(WiimoteButtons.A)
 	
 	if pressed == 0:
