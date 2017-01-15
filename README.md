@@ -2,7 +2,7 @@
 
 # This is Coming Soon
 
-This around 50% done
+This around 90% done
 
 #Feel free to put suggestions in the issues page
 
