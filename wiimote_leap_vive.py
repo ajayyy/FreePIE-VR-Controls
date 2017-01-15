@@ -134,17 +134,17 @@ def vive_controller():
 	joyLi = 0 #index of joysticks[] device object list (see Core plugins Joystick)
 	joyRi = 1
 	
-	Lone = joystick[joyLi].getDown(0)
-	Ltrigger = joystick[joyLi].getDown(1)
-	Lfour = joystick[joyLi].getDown(2)
-	Lstart = joystick[joyLi].getDown(3)
-	Lbumper = joystick[joyLi].getDown(4)
+	Lone = wiimote[joyLi].buttons.button_down(WiimoteButtons.DPadUp) or wiimote[joyLi].buttons.button_down(WiimoteButtons.DPadDown) or wiimote[joyLi].buttons.button_down(WiimoteButtons.DPadLeft) or wiimote[joyLi].buttons.button_down(WiimoteButtons.DPadRight)
+	Ltrigger = wiimote[joyLi].buttons.button_down(WiimoteButtons.B)
+	Lfour = wiimote[joyLi].buttons.button_down(WiimoteButtons.Plus)
+	Lstart = wiimote[joyLi].buttons.button_down(WiimoteButtons.Home)
+	Lbumper = wiimote[joyLi].buttons.button_down(WiimoteButtons.A)
 	
-	Rone = wiimote[0].buttons.button_down(WiimoteButtons.DPadUp) or wiimote[0].buttons.button_down(WiimoteButtons.DPadDown) or wiimote[0].buttons.button_down(WiimoteButtons.DPadLeft) or wiimote[0].buttons.button_down(WiimoteButtons.DPadRight)
-	Rtrigger = wiimote[0].buttons.button_down(WiimoteButtons.B)
-	Rfour = wiimote[0].buttons.button_down(WiimoteButtons.Plus)
-	Rstart = wiimote[0].buttons.button_down(WiimoteButtons.Home)
-	Rbumper = wiimote[0].buttons.button_down(WiimoteButtons.A)
+	Rone = wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadUp) or wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadDown) or wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadLeft) or wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadRight)
+	Rtrigger = wiimote[joyRi].buttons.button_down(WiimoteButtons.B)
+	Rfour = wiimote[joyRi].buttons.button_down(WiimoteButtons.Plus)
+	Rstart = wiimote[joyRi].buttons.button_down(WiimoteButtons.Home)
+	Rbumper = wiimote[joyRi].buttons.button_down(WiimoteButtons.A)
 	
 	if pressed == 0:
 		if ((xbox360[i].leftThumb) ):
@@ -183,10 +183,10 @@ def vive_controller():
 			orrroll1 = freeTrack.roll
 			
 			#calibrate left hand
-			IMURlx = joystick[joyLi].x/float(1024)
-			IMURly = joystick[joyLi].y/float(1024)
-			IMURlz = joystick[joyLi].xRotation/float(1024)
-			IMURlw = joystick[joyLi].yRotation/float(1024)
+			#IMURlx = joystick[joyLi].x/float(1024)
+			#IMURly = joystick[joyLi].y/float(1024)
+			#IMURlz = joystick[joyLi].xRotation/float(1024)
+			#IMURlw = joystick[joyLi].yRotation/float(1024)
 			
 			#calibrate right hand
 			#IMURrx = joystick[joyRi].x/float(1024)
@@ -194,12 +194,16 @@ def vive_controller():
 			#IMURrz = joystick[joyRi].xRotation/float(1024)
 			#IMURrw = joystick[joyRi].yRotation/float(1024)
 		
-			eulersL = quaternion_to_euler(Quaternion(IMURlw, IMURlx, IMURly, IMURlz))
-			eulersR = quaternion_to_euler(Quaternion(IMURrw, IMURrx, IMURry, IMURrz))
+			#eulersL = quaternion_to_euler(Quaternion(IMURlw, IMURlx, IMURly, IMURlz))
+			#eulersR = quaternion_to_euler(Quaternion(IMURrw, IMURrx, IMURry, IMURrz))
 			
-			LHandpitch1 = eulersL.z +math.pi
-			LHandyaw1 = -eulersL.x 
-			LHandroll1 = -eulersL.y +math.pi
+			#LHandpitch1 = eulersL.z +math.pi
+			#LHandyaw1 = -eulersL.x 
+			#LHandroll1 = -eulersL.y +math.pi
+			
+			LHandpitch1 = wiimote[joyLi].ahrs.pitch
+			LHandyaw1 = -wiimote[joyLi].ahrs.yaw
+			LHandroll1 = -wiimote[joyLi].ahrs.roll
 			
 			RHandpitch1 = wiimote[joyRi].ahrs.pitch
 			RHandyaw1 = -wiimote[joyRi].ahrs.yaw
@@ -241,15 +245,6 @@ def vive_controller():
 		hydra[1].start = Lstart
 		hydra[1].bumper = Lbumper
 		hydra[1].joybutton =xbox360[i].rightThumb
-		hydra[1].joyx = joystick[joyLi].z/float(1024)
-		hydra[1].joyy = -joystick[joyLi].zRotation/float(1024)
-		
-		hydra[0].one = Rone
-		hydra[0].trigger = Rtrigger
-		hydra[0].four = Rfour
-		hydra[0].start = Rstart
-		hydra[0].bumper = Rbumper
-		hydra[0].joybutton =xbox360[i].rightThumb
 		if wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadRight):
 			hydra[0].joyx = 1
 		elif wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadLeft):
@@ -257,6 +252,23 @@ def vive_controller():
 		if wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadUp):
 			hydra[0].joyy = 1
 		elif wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadDown):
+			hydra[0].joyy = 0
+		#hydra[1].joyx = joystick[joyLi].z/float(1024)
+		#hydra[1].joyy = -joystick[joyLi].zRotation/float(1024)
+		
+		hydra[0].one = Rone
+		hydra[0].trigger = Rtrigger
+		hydra[0].four = Rfour
+		hydra[0].start = Rstart
+		hydra[0].bumper = Rbumper
+		hydra[0].joybutton =xbox360[i].rightThumb
+		if wiimote[joyLi].buttons.button_down(WiimoteButtons.DPadRight):
+			hydra[0].joyx = 1
+		elif wiimote[joyLi].buttons.button_down(WiimoteButtons.DPadLeft):
+			hydra[0].joyx = 0
+		if wiimote[joyLi].buttons.button_down(WiimoteButtons.DPadUp):
+			hydra[0].joyy = 1
+		elif wiimote[joyLi].buttons.button_down(WiimoteButtons.DPadDown):
 			hydra[0].joyy = 0
 		#hydra[0].joyx = -joystick[joyRi].z/float(1024)
 		#hydra[0].joyy = joystick[joyRi].zRotation/float(1024)
