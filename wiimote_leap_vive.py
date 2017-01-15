@@ -88,7 +88,8 @@ if toggle:
   	enabled = not enabled
 
 if recenter:
-   	oculusVR.center()
+	pass
+   	#oculusVR.center()
    	
 global pressed
 def vive_controller():
@@ -140,10 +141,10 @@ def vive_controller():
 	Lbumper = joystick[joyLi].getDown(4)
 	
 	Rone = joystick[joyRi].getDown(0)
-	Rtrigger = joystick[joyRi].getDown(1)
+	Rtrigger = wiimote[0].buttons.button_down(WiimoteButtons.B)
 	Rfour = joystick[joyRi].getDown(2)
 	Rstart = joystick[joyRi].getDown(3)
-	Rbumper = joystick[joyRi].getDown(4)
+	Rbumper = wiimote[0].buttons.button_down(WiimoteButtons.A)
 	
 	if pressed == 0:
 		if ((xbox360[i].leftThumb) ):
@@ -174,12 +175,12 @@ def vive_controller():
 			#oculusVR.center
 			
 			#calibration orientation and position
-			T_matrix_calibrationCenter = [ [1,0,0, oculusVR.x], [0,1,0,oculusVR.y], [0,0,1,oculusVR.z], [0,0,0,1] ]
-			R_matrix_calibrationCenter = AltTransformMatrix_yawpitchroll(oculusVR.yaw, oculusVR.pitch, oculusVR.roll)
+			T_matrix_calibrationCenter = [ [1,0,0, freeTrack.x], [0,1,0,freeTrack.y], [0,0,1,freeTrack.z], [0,0,0,1] ]
+			R_matrix_calibrationCenter = AltTransformMatrix_yawpitchroll(freeTrack.yaw, freeTrack.pitch, freeTrack.roll)
 			
-			orrpitch1 = oculusVR.pitch
-			orryaw1 = oculusVR.yaw
-			orrroll1 = oculusVR.roll
+			orrpitch1 = freeTrack.pitch
+			orryaw1 = freeTrack.yaw
+			orrroll1 = freeTrack.roll
 			
 			#calibrate left hand
 			IMURlx = joystick[joyLi].x/float(1024)
@@ -206,13 +207,13 @@ def vive_controller():
 			
 			pressed = 1 
 			
-		elif (xbox360[i].start):
+		elif (wiimote[i].buttons.button_down(WiimoteButtons.Plus)):
 			hydra[1].start = True
 			pressed = 1
-		elif (xbox360[i].back):
+		elif (wiimote[i].buttons.button_down(WiimoteButtons.Minus)):
 			hydra[0].start = True
 			pressed = 1
-	elif (xbox360[i].start or xbox360[i].back):
+	elif (wiimote[i].buttons.button_down(WiimoteButtons.Plus) or wiimote[i].buttons.button_down(WiimoteButtons.Minus)):
 		pressed = 1
 	else:
 		hydra[0].start = False
@@ -254,14 +255,14 @@ def vive_controller():
 		
 		#hydra controls
 		
-		deltaX = oculusVR.x - T_matrix_calibrationCenter[0][3]
-		deltaY = oculusVR.y - T_matrix_calibrationCenter[1][3]
-		deltaZ = oculusVR.z - T_matrix_calibrationCenter[2][3]
+		deltaX = freeTrack.x - T_matrix_calibrationCenter[0][3]
+		deltaY = freeTrack.y - T_matrix_calibrationCenter[1][3]
+		deltaZ = freeTrack.z - T_matrix_calibrationCenter[2][3]
 		T_matrix_current = [ [1,0,0, deltaX], [0,1,0,deltaY], [0,0,1,deltaZ], [0,0,0,1] ]#curent T of hmd, relative to calibration point
 		
-		deltaYaw = oculusVR.yaw - orryaw1
-		deltaPitch = oculusVR.pitch -orrpitch1
-		deltaRoll = oculusVR.roll - orrroll1
+		deltaYaw = freeTrack.yaw - orryaw1
+		deltaPitch = freeTrack.pitch -orrpitch1
+		deltaRoll = freeTrack.roll - orrroll1
 		R_matrix_current = AltTransformMatrix_yawpitchroll(deltaYaw, deltaPitch, deltaRoll) #curent R of hmd, relative to calibration point
 		
 		#create transformation of Leap sensor data to HMD position (e.g. used to calculate the Leap's coordinate system in space, relative to calibration point)
@@ -379,8 +380,8 @@ def vive_controller():
 		hydra[0].pitch = (eulersR.y-RHandroll1)
 	
 	#----------
-	diagnostics.watch(joystick[joyLi].getDown(1))
-	diagnostics.watch(joystick[joyRi].getDown(1))
+	#diagnostics.watch(joystick[joyLi].getDown(1))
+	#diagnostics.watch(joystick[joyRi].getDown(1))
 	
 	#freeTrack.x = posxhmd
 	#freeTrack.y = posyhmd
@@ -389,55 +390,55 @@ def vive_controller():
 	#freeTrack.pitch = orryhmd
 	#freeTrack.roll = orrzhmd
 
-	diagnostics.watch(Rone)
-	diagnostics.watch(Rtrigger)
-	diagnostics.watch(Rfour)
-	diagnostics.watch(Rstart)
-	diagnostics.watch(Rbumper )
+	#diagnostics.watch(Rone)
+	##diagnostics.watch(Rtrigger)
+	#diagnostics.watch(Rfour)
+	#diagnostics.watch(Rstart)
+	#diagnostics.watch(Rbumper )
 
-	diagnostics.watch(xbox360[i].a)
-	diagnostics.watch(xbox360[i].b)
-	diagnostics.watch(xbox360[i].x)
-	diagnostics.watch(xbox360[i].y)
-	diagnostics.watch(xbox360[i].start)
-	diagnostics.watch(xbox360[i].back)
-	diagnostics.watch(xbox360[i].leftStickX)
-	diagnostics.watch(xbox360[i].leftStickY)
-	diagnostics.watch(xbox360[i].rightStickX)
-	diagnostics.watch(xbox360[i].rightStickY)
-	diagnostics.watch(xbox360[i].leftShoulder)
-	diagnostics.watch(xbox360[i].rightShoulder)
-	diagnostics.watch(xbox360[i].leftTrigger)
-	diagnostics.watch(xbox360[i].rightTrigger)
-	diagnostics.watch(posx0)
-	diagnostics.watch(posy0)
-	diagnostics.watch(posz0)
-	diagnostics.watch(orrpitch0)
-	diagnostics.watch(orryaw0)
-	diagnostics.watch(orrroll0)
-	diagnostics.watch(posx1)
-	diagnostics.watch(posy1)
-	diagnostics.watch(posz1)
-	diagnostics.watch(orrpitch1)
-	diagnostics.watch(orryaw1)
-	diagnostics.watch(orrroll1)
-	diagnostics.watch(posxhmd)
-	diagnostics.watch(posyhmd)
-	diagnostics.watch(poszhmd)
-	diagnostics.watch(orrxhmd)
-	diagnostics.watch(orryhmd)
-	diagnostics.watch(orrzhmd)
-	diagnostics.watch(IMURlx)
-	diagnostics.watch(IMURly)
-	diagnostics.watch(IMURlz)
-	diagnostics.watch(IMURlw)
-	diagnostics.watch(oculusVR.x)
-	diagnostics.watch(oculusVR.y)
-	diagnostics.watch(oculusVR.z)
-	diagnostics.watch(oculusVR.pitch)
-	diagnostics.watch(oculusVR.yaw)
-	diagnostics.watch(oculusVR.roll)
-	#diagnostics.watch(RightHandPos_x)
+	#diagnostics.watch(xbox360[i].a)
+	#diagnostics.watch(xbox360[i].b)
+	#diagnostics.watch(xbox360[i].x)
+	#diagnostics.watch(xbox360[i].y)
+	#diagnostics.watch(xbox360[i].start)
+#	diagnostics.watch(xbox360[i].back)
+	#diagnostics.watch(xbox360[i].leftStickX)
+	#diagnostics.watch(xbox360[i].leftStickY)
+#	diagnostics.watch(xbox360[i].rightStickX)
+#	diagnostics.watch(xbox360[i].rightStickY)
+#diagnostics.watch(xbox360[i].leftShoulder)
+#	diagnostics.watch(xbox360[i].rightShoulder)
+	#diagnostics.watch(xbox360[i].leftTrigger)
+#	diagnostics.watch(xbox360[i].rightTrigger)
+#	diagnostics.watch(posx0)
+#	diagnostics.watch(posy0)
+#	diagnostics.watch(posz0)
+#	diagnostics.watch(orrpitch0)
+#	diagnostics.watch(orryaw0)
+#	diagnostics.watch(orrroll0)
+#	diagnostics.watch(posx1)
+#	diagnostics.watch(posy1)
+	#diagnostics.watch(posz1)
+#diagnostics.watch(orrpitch1)
+#	diagnostics.watch(orryaw1)
+#	diagnostics.watch(orrroll1)
+	#diagnostics.watch(posxhmd)
+	#diagnostics.watch(posyhmd)
+	#diagnostics.watch(poszhmd)
+	#diagnostics.watch(orrxhmd)
+	#diagnostics.watch(orryhmd)
+	#diagnostics.watch(orrzhmd)
+	#diagnostics.watch(IMURlx)
+#	diagnostics.watch(IMURly)
+	#diagnostics.watch(IMURlz)
+#	diagnostics.watch(IMURlw)
+#	diagnostics.watch(oculusVR.x)
+#	diagnostics.watch(oculusVR.y)
+#	diagnostics.watch(oculusVR.z)
+#	diagnostics.watch(oculusVR.pitch)
+#	diagnostics.watch(oculusVR.yaw)
+	#diagnostics.watch(oculusVR.roll)
+	#diagnostics.watch(RightHandPos_x)  
 	#diagnostics.watch(RightHandPos_y)
 	#diagnostics.watch(RightHandPos_z)
 	
