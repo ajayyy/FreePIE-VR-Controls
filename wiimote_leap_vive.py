@@ -189,10 +189,10 @@ def vive_controller():
 			IMURlw = joystick[joyLi].yRotation/float(1024)
 			
 			#calibrate right hand
-			IMURrx = joystick[joyRi].x/float(1024)
-			IMURry = joystick[joyRi].y/float(1024)
-			IMURrz = joystick[joyRi].xRotation/float(1024)
-			IMURrw = joystick[joyRi].yRotation/float(1024)
+			#IMURrx = joystick[joyRi].x/float(1024)
+			#IMURry = joystick[joyRi].y/float(1024)
+			#IMURrz = joystick[joyRi].xRotation/float(1024)
+			#IMURrw = joystick[joyRi].yRotation/float(1024)
 		
 			eulersL = quaternion_to_euler(Quaternion(IMURlw, IMURlx, IMURly, IMURlz))
 			eulersR = quaternion_to_euler(Quaternion(IMURrw, IMURrx, IMURry, IMURrz))
@@ -201,9 +201,9 @@ def vive_controller():
 			LHandyaw1 = -eulersL.x 
 			LHandroll1 = -eulersL.y +math.pi
 			
-			RHandpitch1 = eulersR.z +math.pi
-			RHandyaw1 = -eulersR.x 
-			RHandroll1 = -eulersR.y +math.pi
+			RHandpitch1 = wiimote[joyRi].ahrs.pitch
+			RHandyaw1 = -wiimote[joyRi].ahrs.yaw
+			RHandroll1 = -wiimote[joyRi].ahrs.roll
 			
 			pressed = 1 
 			
@@ -250,8 +250,16 @@ def vive_controller():
 		hydra[0].start = Rstart
 		hydra[0].bumper = Rbumper
 		hydra[0].joybutton =xbox360[i].rightThumb
-		hydra[0].joyx = -joystick[joyRi].z/float(1024)
-		hydra[0].joyy = joystick[joyRi].zRotation/float(1024)
+		if wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadRight):
+			hydra[0].joyx = 1
+		elif wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadLeft):
+			hydra[0].joyx = 0
+		if wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadUp):
+			hydra[0].joyy = 1
+		elif wiimote[joyRi].buttons.button_down(WiimoteButtons.DPadDown):
+			hydra[0].joyy = 0
+		#hydra[0].joyx = -joystick[joyRi].z/float(1024)
+		#hydra[0].joyy = joystick[joyRi].zRotation/float(1024)
 		
 		#hydra controls
 		
@@ -358,22 +366,30 @@ def vive_controller():
 			hydra[0].z = (T_matrix_Calibrated_LeapDataR_z*METER_TO_MM) 
 	
 		#---------- SET HAND ROTATION FROM Arduino HID DEVICES, CONVERT FROM SHORT TO FLOAT
-		IMURlx = joystick[joyLi].x/float(1024)
-		IMURly = joystick[joyLi].y/float(1024)
-		IMURlz = joystick[joyLi].xRotation/float(1024)
-		IMURlw = joystick[joyLi].yRotation/float(1024)
+		#IMURlx = joystick[joyLi].x/float(1024)
+		#IMURly = joystick[joyLi].y/float(1024)
+		#IMURlz = joystick[joyLi].xRotation/float(1024)
+		#IMURlw = joystick[joyLi].yRotation/float(1024)
 		
-		IMURrx = joystick[joyRi].x/float(1024)
-		IMURry = joystick[joyRi].y/float(1024)
-		IMURrz = joystick[joyRi].xRotation/float(1024)
-		IMURrw = joystick[joyRi].yRotation/float(1024)
+		#IMURrx = joystick[joyRi].x/float(1024)
+		#IMURry = joystick[joyRi].y/float(1024)
+		#IMURrz = joystick[joyRi].xRotation/float(1024)
+		#IMURrw = joystick[joyRi].yRotation/float(1024)
 		
-		eulersL = quaternion_to_euler(Quaternion(IMURlw, IMURlx, IMURly, IMURlz))
-		eulersR = quaternion_to_euler(Quaternion(IMURrw, IMURrx, IMURry, IMURrz))
+		#eulersL = quaternion_to_euler(Quaternion(IMURlw, IMURlx, IMURly, IMURlz))
+		#eulersR = quaternion_to_euler(Quaternion(IMURrw, IMURrx, IMURry, IMURrz))
 		
-		hydra[1].yaw  = -( eulersL.z-LHandpitch1)
-		hydra[1].roll = (eulersL.x-LHandyaw1)
-		hydra[1].pitch = (eulersL.y-LHandroll1)
+		#hydra[1].yaw  = -( eulersL.z-LHandpitch1)
+		#hydra[1].roll = (eulersL.x-LHandyaw1)
+		#hydra[1].pitch = (eulersL.y-LHandroll1)
+		
+		#hydra[0].yaw  = -( eulersR.z-RHandpitch1)
+		#hydra[0].roll = (eulersR.x-RHandyaw1)
+		#hydra[0].pitch = (eulersR.y-RHandroll1)
+		
+		hydra[1].yaw  = -wiimote[0].ahrs.yaw
+		hydra[1].roll = wiimote[0].ahrs.roll
+		hydra[1].pitch = wiimote[0].ahrs.pitch
 		
 		hydra[0].yaw  = -( eulersR.z-RHandpitch1)
 		hydra[0].roll = (eulersR.x-RHandyaw1)
