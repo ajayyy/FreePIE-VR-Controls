@@ -399,13 +399,13 @@ def vive_controller():
 		#hydra[0].roll = (eulersR.x-RHandyaw1)
 		#hydra[0].pitch = (eulersR.y-RHandroll1)
 		
-		hydra[1].yaw  = -wiimote[0].ahrs.yaw
-		hydra[1].roll = wiimote[0].ahrs.roll
-		hydra[1].pitch = wiimote[0].ahrs.pitch
+		hydra[1].yaw  = -wiimote[1].ahrs.yaw
+		hydra[1].roll = wiimote[1].ahrs.roll
+		hydra[1].pitch = wiimote[1].ahrs.pitch
 		
-		hydra[0].yaw  = -( eulersR.z-RHandpitch1)
-		hydra[0].roll = (eulersR.x-RHandyaw1)
-		hydra[0].pitch = (eulersR.y-RHandroll1)
+		hydra[0].yaw  = -wiimote[0].ahrs.yaw
+		hydra[0].roll = wiimote[0].ahrs.roll
+		hydra[0].pitch = wiimote[0].ahrs.pitch
 	
 	#----------
 	#diagnostics.watch(joystick[joyLi].getDown(1))
