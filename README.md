@@ -7,6 +7,7 @@ If you would like to test it out, here are the instructions:
 2. Install the Leap Motion FreePIE plugin located here: http://www.mtbs3d.com/phpBB/viewtopic.php?f=139&t=19753
 
 _If you find any problems opening FreePIE after downloading this, visit https://github.com/AndersMalmgren/FreePIE/issues/101_
+
 3. Install Leap Motion sensor Orion https://api.leapmotion.com/orion
 4. Install team VR Razer Hydra Driver http://store.steampowered.com/app/491380/
 5. Copy the sixense_fake.dll (located in the root folder of your FreePIE installation) over the sixense.dll in the driver files from steam (usually located in C:\Program Files (x86)\Steam\steamapps\common\SteamVR Driver for Razer Hydra)
