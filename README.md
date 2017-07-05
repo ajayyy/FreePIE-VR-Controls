@@ -1,6 +1,6 @@
 # FreePIE-VR-Controls for Wii-Motes
 
-#EDIT July 5th:
+# EDIT July 5th:
 
 Sorry for abandoning this, but I never got it working perfectly, once I get my computer working with SteamVR again, I'm going to try this again. I might do this with the Kinect too (Kinect + Wiimote). Stay tuned by watching this repo. If you have any questions, you can contact me here: dev   @   ajayinkingston.com (I added spaces to prevent bots from stealing it)
 
