@@ -17,7 +17,7 @@ If you would like to test it out, here are the instructions:
 5. Copy the sixense_fake.dll (located in the root folder of your FreePIE installation) over the sixense.dll in the driver files from steam (usually located in C:\Program Files (x86)\Steam\steamapps\common\SteamVR Driver for Razer Hydra)
 6. Download the files in this repository: https://github.com/ajayyy/Wiimote-FreePIE-VR-Controls/archive/master.zip
 
-#Once installed, do this to run it
+# Once installed, do this to run it
 1. Run FreePIE, and open up one of the scripts in this repository (try both out)
 2. Run the script
 3. Run SteamVR
