@@ -2,13 +2,13 @@
 
 # EDIT August 24th 2017:
 
-Someone by the name of sstf found out a way to make the controllers appear. They now should appear after pressing a button on the wii controller. The rotation still doesn't work though. One guess I have about the rotation is that freepie might only use the rotation of wiimotes with wii motion plus.
+Someone by the name of sstf found out a way to make the controllers appear. They now should appear after pressing a button on the wii controller. The rotation still doesn't work though. One guess I have about the rotation is that freepie might only use the rotation of wiimotes with wii motion plus. If anyone has wii motion plus it would be awesome if they could tey it out with that. Refer to the beta testing section.
 
 # EDIT July 5th 2017:
 
 Sorry for abandoning this, but I never got it working perfectly, once I get my computer working with SteamVR again, I'm going to try this again. I might do this with the Kinect too (Kinect + Wiimote). Stay tuned by watching this repo. If you have any questions, you can contact me here: dev   @   ajayinkingston.com (I added spaces to prevent bots from stealing it)
 
-# Beta Testing    --- Old, you can try if you want, but it probably won't work.
+# Beta Testing
 If you would like to test it out, here are the instructions:
 
 1. Install FreePIE http://andersmalmgren.github.io/FreePIE/
