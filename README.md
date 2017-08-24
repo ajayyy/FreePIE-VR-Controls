@@ -1,5 +1,9 @@
 # FreePIE-VR-Controls for Wii-Motes
 
+# EDIT August 24th 2017:
+
+Someone by the name of sstf found out a way to make the controllers appear. They now should appear after pressing a button on the wii controller. The rotation still doesn't work though. One guess I have about the rotation is that freepie might only use the rotation of wiimotes with wii motion plus.
+
 # EDIT July 5th 2017:
 
 Sorry for abandoning this, but I never got it working perfectly, once I get my computer working with SteamVR again, I'm going to try this again. I might do this with the Kinect too (Kinect + Wiimote). Stay tuned by watching this repo. If you have any questions, you can contact me here: dev   @   ajayinkingston.com (I added spaces to prevent bots from stealing it)
