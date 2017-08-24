@@ -147,7 +147,7 @@ def vive_controller():
 	Rbumper = wiimote[joyRi].buttons.button_down(WiimoteButtons.A)
 	
 	if pressed == 0:
-		if ((xbox360[i].leftThumb) ):
+		if ((wiimote[joyLi].buttons.button_down(WiimoteButtons.Plus)) ):
 			#hydra[0].isDocked = True
 			#hydra[1].isDocked = True
 			
