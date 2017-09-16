@@ -16,7 +16,7 @@ Sorry for abandoning this, but I never got it working perfectly, once I get my c
 If you would like to test it out, here are the instructions:
 
 1. Install FreePIE http://andersmalmgren.github.io/FreePIE/
-2. Install the Leap Motion FreePIE plugin located here: http://www.mtbs3d.com/phpBB/viewtopic.php?f=139&t=19753
+2. Install the Leap Motion FreePIE plugin located here: ~~http://www.mtbs3d.com/phpBB/viewtopic.php?f=139&t=19753~~ **Edit**: the link seems to be broken on that page now. You can use the file called LeapMotionFreepiePlugin.dll in the repo. Just move that to the folder called plugins located in the FreePIE installation directory.
 
 <b>If you find any problems opening FreePIE after downloading the plugin, visit https://github.com/AndersMalmgren/FreePIE/issues/101</b>
 
