@@ -1,5 +1,9 @@
 # FreePIE-VR-Controls for Wii-Motes
 
+# EDIT September 16th 2017:
+
+Looks like the wii rotations is only read when you have a wii motion plus. I don't really know of a way to fix that, if anyone finds away, feel free to send it to me. Thanks!
+
 # EDIT August 24th 2017:
 
 Someone by the name of sstf found out a way to make the controllers appear. They now should appear after pressing a button on the wii controller. The rotation still doesn't work though. One guess I have about the rotation is that freepie might only use the rotation of wiimotes with wii motion plus. If anyone has wii motion plus it would be awesome if they could tey it out with that. Refer to the beta testing section.
