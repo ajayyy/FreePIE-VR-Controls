@@ -1,5 +1,13 @@
 # FreePIE-VR-Controls for Wii-Motes
 
+# Thanks sstf! (November 2nd 2017)
+
+I have added two files made by sstf (wiimote_leap_vive_2.py, and wiimote_leap_vive_nogyro.py).
+
+wiimote_leap_vive_nogyro.py uses the leap motion gyro instead of the wiimote gyro so we'll help people having issues with the wiimote gyro not working with freepie (Also see https://github.com/ajayyy/Wiimote-FreePIE-VR-Controls/issues/1#issuecomment-330001698 if you are having this issue)
+
+wiimote_leap_vive_2.py is an improved version of wiimote_leap_vive.py, and might be better for people having issues with it.
+
 # EDIT September 16th 2017:
 
 Looks like the wii rotations is only read when you have a wii motion plus. I don't really know of a way to fix that, if anyone finds away, feel free to send it to me. Thanks!
